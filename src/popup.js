@@ -15,6 +15,7 @@ const uploading = params.get("uploading")
 
 const storage = browser.storage.local
 const sites = browser.runtime.getManifest().content_scripts.flatMap(script => script.matches)
+const firefox = navigator.userAgent.toLocaleLowerCase().includes("firefox")
 
 // styling
 if (tab) {
@@ -88,9 +89,9 @@ document.querySelector(".upload-set-btn").querySelector("input[type=file]").addE
 // listen for upload buttons(to trigger the file inputs)
 document.querySelectorAll(".upload-btn, .upload-set-btn").forEach(btn => {
     btn.addEventListener("click", e => {
-        if (tab) {
+        if (!firefox || tab) {
             btn.querySelector("input[type=file]").click()
-        } else{
+        } else {
             // a popup will close itself (and kill the script) when a file chooser is opened
             // so navigate to a newly openned tab, which does not close itself
             let uploading
