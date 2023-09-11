@@ -16,7 +16,7 @@
 
     --shadow: var(--lightgray);
     --theme: var(--gray);
-    --theme-non-gry: var(--blue);
+    --theme-non-gray: var(--blue);
   }
 
 body {
@@ -99,7 +99,6 @@ input[type=text] {
     padding: 1pt 3pt 1pt 3pt;
     border: 1px solid var(--lightgray);
     border-radius: 4pt;
-    min-width: 200pt;
 }
 
 input[type=text]:hover {
