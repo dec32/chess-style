@@ -1,13 +1,19 @@
 # Chess Style
 
-Chess Style is a cross-browser extension that allows you to customize your piece set on lichess.org and chess.com.
+Chess Style is a Firefox/Chrome extension that allows you to customize your piece set on lichess.org and chess.com.
 
 ## Release
 
 - [Firefox Add-on](https://addons.mozilla.org/firefox/addon/chess-style/)
-- Chrome Extension
+- [Chrome Extension](https://github.com/dec32/chess-style/releases/latest)
+
+Things would be a lot easier if Google didn't charge me 5 bucks for a developer account.
 
 ## Detail
+
+![](https://github.com/dec32/Image-Storage/blob/master/chess-style/screenshot-1.png)
+![](https://github.com/dec32/Image-Storage/blob/master/chess-style/screenshot-2.png)
+![](https://github.com/dec32/Image-Storage/blob/master/chess-style/screenshot-3.png)
 
 The extension enables users to customize their piece sets sets through:
 
