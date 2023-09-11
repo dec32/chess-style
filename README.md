@@ -5,7 +5,7 @@ Chess Style is a Firefox/Chrome extension that allows you to customize your piec
 ## Release
 
 - [Firefox Add-on](https://addons.mozilla.org/firefox/addon/chess-style/)
-- [Chrome Extension](https://github.com/dec32/chess-style/releases/download/v0.1/chess-style.zip](https://github.com/dec32/chess-style/releases/latest)
+- [Chrome Extension](https://github.com/dec32/chess-style/releases/latest)
 
 Things would be a lot easier if Google didn't charge me 5 bucks for a developer account.
 
