@@ -11,6 +11,10 @@ Things would be a lot easier if Google didn't charge me 5 bucks for a developer 
 
 ## Detail
 
+![](https://github.com/dec32/Image-Storage/blob/master/chess-style/screenshot-1.png)
+![](https://github.com/dec32/Image-Storage/blob/master/chess-style/screenshot-2.png)
+![](https://github.com/dec32/Image-Storage/blob/master/chess-style/screenshot-3.png)
+
 The extension enables users to customize their piece sets sets through:
 
 1. Filling in URLs;
