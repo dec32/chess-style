@@ -1,0 +1,144 @@
+:root {
+    /* for controls and shadows */
+    --whitesmoke: rgb(245,245,245);
+    --lightgray: rgb(215,215,215);
+    --puregray: rgb(128,128,128);
+    --darkgray: rgb(78, 78, 78);
+
+    /* theme colors */
+    --gray: var(--whitesmoke);
+    --blue: #4285F4;
+    --red: rgb(136, 0, 0);
+    --yellow: #FBBC05;
+    --green: #34A853;
+    --black: black;
+
+
+    --shadow: var(--lightgray);
+    --theme: var(--gray);
+    --theme-non-gry: var(--blue);
+  }
+
+body {
+    text-align: center;
+    margin: 0;
+}
+
+.main { 
+    font-family: "Red Hat Text", "Verdana", sans-serif;
+    font-size: 13pt;
+}
+
+.heading {
+    font-family: sans-serif;
+    font-size: 20pt;
+    font-weight: lighter;
+    text-align: left;
+    padding: 20pt 10pt 10pt 15pt;
+    background-color: var(--theme);
+    border-bottom: 1px solid var(--lightgray);
+    color: black;
+    box-shadow: 0 0 10pt 0pt var(--shadow);
+    user-select: none
+}
+
+.heading:hover {
+    cursor: pointer;
+}
+
+.content {
+    margin: 0 auto;
+    width: fit-content;
+    padding: 10pt 10pt 10pt 10pt;
+    padding-left: 10pt;
+    padding-right: 10pt;
+    padding-bottom: 10pt;
+    padding-top: 10pt;
+}
+
+.color-heading {
+    text-align: center;
+    font-weight: bold;
+    font-size: 10pt;
+    color: var(--puregray);
+    padding-top: 2pt;
+    padding-bottom: 2pt;
+}
+
+.piece-settings {
+    text-align: left;
+    width: 100%;
+    /* background-color: green; */
+}
+
+
+.upload-set-btn {
+    width: 100%;
+    margin-top: 10pt;
+    /* display: none; */
+}
+
+.url-input {
+    padding-top: 1mm;
+    padding-bottom: 1mm;
+}
+
+
+.piece-name {
+    text-align: right;
+}
+
+/* elements */
+input[type=file] {
+    display:none;
+    /* border-radius: 50vh; */
+}
+
+input[type=text] {
+    font-size: 13pt;
+    padding: 1pt 3pt 1pt 3pt;
+    border: 1px solid var(--lightgray);
+    border-radius: 4pt;
+}
+
+input[type=text]:hover {
+    border-color: transparent;
+    box-shadow: 0 0 5pt 0px var(--shadow);
+}
+
+input[type=text]:focus {
+    outline: none;
+    border-color: transparent;
+    background-color: var(--whitesmoke);
+    border-radius: 4pt 4pt 0 0;
+    border-bottom: 1px solid var(--theme-non-gray);
+}
+
+button {
+    color: var(--darkgray);
+    font-family: "Red Hat Text", "Verdana", sans-serif;
+    font-size: 10pt;
+    padding: 2pt 10pt 2pt 10pt;
+    background-color: var(--whitesmoke);
+    border: 1px solid transparent;
+    border-radius: 50vh;
+}
+
+button:hover {
+    cursor: pointer;
+    border: 1px solid var(--lightgray);
+    box-shadow: 0 1px 3pt 0px var(--shadow);
+}
+
+button:active {
+    cursor: pointer;
+    border: 1px solid var(--lightgray);
+    box-shadow: 0 1px 3pt 0px var(--shadow);
+    background-color: var(--lightgray);
+}
+
+td {
+    padding: 2pt 2pt 2pt 2pt;
+}
+
+
