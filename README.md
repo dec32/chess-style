@@ -38,3 +38,7 @@ The support for chess.com is not fully accomplished, that is to say, the customi
 3. Click "Load unpacked extension" and select the unzipped folder.
 
 Things would be a lot easier if Google didn't charge me 5 bucks for a developer account.
+
+## Themes
+
+- [John Pablok](https://github.com/dec32/chess-style/releases/download/v0.1/john-pablok.zip)
