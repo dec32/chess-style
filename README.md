@@ -5,9 +5,8 @@ Chess Style is a Firefox/Chrome extension that allows you to customize your piec
 ## Release
 
 - [Firefox Add-on](https://addons.mozilla.org/firefox/addon/chess-style/)
-- [Chrome Extension](https://github.com/dec32/chess-style/releases/latest)
 
-Things would be a lot easier if Google didn't charge me 5 bucks for a developer account.
+To install for Chrome, please see: [Install For Chrome](##-Install-For-Chrome)
 
 ## Detail
 
@@ -29,3 +28,13 @@ When uploading a folder. The file name of an image must contain both the color a
 - `wn_with_shadow.webp`;
 
 The support for chess.com is not fully accomplished, that is to say, the customization won't apply to the homepage.
+
+## Install For Chrome
+
+[Chrome Extension](https://github.com/dec32/chess-style/releases/latest)
+
+1. Download the zip file from the link above and unzip it;
+2. Go to chrome://extensions/, toggle on developer mode;
+3. Click "Load unpacked extension" and select the unzipped folder.
+
+Things would be a lot easier if Google didn't charge me 5 bucks for a developer account.
