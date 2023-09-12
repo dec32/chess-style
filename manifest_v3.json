@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Chess Style",
-  "version": "0.1",
+  "version": "0.2",
   "description": "Customize your piece set on lichess.org and chess.com.",
   "icons": {
     "281": "res/icon.png"
@@ -22,5 +22,5 @@
       "js": ["src/content_chess.js"]
     }
   ],
-  "permissions": ["storage"]
+  "permissions": ["storage", "tabs"]
 }
