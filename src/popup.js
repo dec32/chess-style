@@ -23,16 +23,16 @@ if (tab) {
 }
 style.enable()
 
-// recover from storage and fill up the text inputs
+// recover from storage and fill up the textfields
 storage.get(obj => {
     console.debug(`storage.get(): ${JSON.stringify(obj)}`)
     for (let key of Object.keys(obj)) {
-        let id = key.replace("_", "-")
-        let pieceNode = document.querySelector(`#${id}`)
-        if (pieceNode) {
-            let url = obj[key]
-            pieceNode.querySelector("input[type=text]").value = url
+        if (key == "theme") {
+            continue
         }
+        let url = obj[key]
+        let id = key.split("_")
+        setTextfield(id[0], id[1], url)
     }
 })
 
@@ -47,42 +47,21 @@ document.querySelectorAll(".url-text-input").forEach(input => {
     })
 })
 
-// listen for uploads (single image)
+// listen for uploads(single image)
 document.querySelectorAll(".upload-btn").forEach(btn => {
     let input = btn.querySelector("input[type=file]")
     input.addEventListener("input", e => {
         let pieceNode = e.target.closest("tr")
         let id = pieceNode.id.split("-")
-        let color = id[0]
-        let piece = id[1]
-
         let file = e.target.files[0]
-        let reader = new FileReader()
-        reader.addEventListener("load", () => {
-            let url = reader.result
-            saveAndApply(color, piece, url)
-            pieceNode.querySelector("input[type=text]").value = url
-        })
-        reader.readAsDataURL(file);
+        handleFile(file, {color: id[0], piece:id[1]})
     })
 })
 
-// listen for upload (folder)
+// listen for uploads(folder)
 document.querySelector(".upload-set-btn").querySelector("input[type=file]").addEventListener("input", e => {
     for (let file of e.target.files) {
-        console.debug(file)
-        let id = filename.analyze(file.name)
-        if (id == null) {
-            console.warn(`Can not recognize file ${file.name}.`)
-            continue
-        }
-        let reader = new FileReader()
-        reader.addEventListener("load", () => {
-            let url = reader.result
-            saveAndApply(id.color, id.piece, url)
-            document.querySelector(`#${id.color}-${id.piece}`).querySelector("input[type=text]").value = url
-        })
-        reader.readAsDataURL(file);   
+        handleFile(file)
     }
 })
 
@@ -117,6 +96,16 @@ if (tab && uploading) {
     }   
 }
 
+function setTextfield(color, piece, url) {
+    let textfield = document.querySelector(`#${color}-${piece}`).querySelector("input[type=text]")
+    if (url.length >= 64) {
+        // to speedup pageload. filling big strings into textfileds is very slow.
+        textfield.value = url.substring(0, 64)
+        textfield.addEventListener("focus", e=>{e.target.value = url}, {once: true})
+    } else {
+        textfield.value = url
+    }
+}
 
 function saveAndApply(color, piece, url) {
     // store the changes
@@ -131,4 +120,24 @@ function saveAndApply(color, piece, url) {
             browser.tabs.sendMessage(tab.id, {color: color, piece: piece, url: url})
         }
     })
+}
+
+function handleFile(file, id = null) {
+    if (!file.type.startsWith("image")) {
+        return
+    }
+    if (id == null) {
+        id = filename.analyze(file.name)
+    }
+    if (id == null) {
+        console.warn(`Can not recognize file ${file.name}.`)
+        return
+    }
+    let reader = new FileReader()
+    reader.addEventListener("load", () => {
+        let url = reader.result
+        setTextfield(id.color, id.piece, url)
+        saveAndApply(id.color, id.piece, url)
+    })
+    reader.readAsDataURL(file);
 }
