@@ -31,7 +31,7 @@ The support for chess.com is not fully accomplished, that is to say, the customi
 
 ## Install For Chrome
 
-[Chrome Extension](https://github.com/dec32/chess-style/releases/latest)
+[Chrome Extension](https://github.com/dec32/chess-style/releases/latest/chess-style-for-chrome.zip)
 
 1. Download the zip file from the link above and unzip it;
 2. Go to chrome://extensions/, toggle on developer mode;
