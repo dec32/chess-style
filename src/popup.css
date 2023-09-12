@@ -98,6 +98,7 @@ input[type=text] {
     font-size: 13pt;
     padding: 1pt 3pt 1pt 3pt;
     border: 1px solid var(--lightgray);
+    margin-bottom: 1px; /*reserve 1 extra pixel of width for width increment of border-bottom when focused*/
     border-radius: 4pt;
 }
 
@@ -111,7 +112,8 @@ input[type=text]:focus {
     border-color: transparent;
     background-color: var(--whitesmoke);
     border-radius: 4pt 4pt 0 0;
-    border-bottom: 1px solid var(--theme-non-gray);
+    border-bottom: 2px solid var(--theme-non-gray);
+    margin-bottom: 0;
 }
 
 button {
