@@ -12,7 +12,7 @@ To install for Chrome, please see: [Install For Chrome](#install-for-chrome)
 
 |Popup|Lichess|Chess|
 |:----:|:----:|:----:|
-|![](https://github.com/dec32/Image-Storage/blob/master/chess-style/screenshot-1.png)|![](https://github.com/dec32/Image-Storage/blob/master/chess-style/screenshot-2.png)|![](https://github.com/dec32/Image-Storage/blob/master/chess-style/screenshot-3.png)|
+|![](https://github.com/dec32/Image-Storage/blob/master/chess-style/popup.png)|![](https://github.com/dec32/Image-Storage/blob/master/chess-style/lichess.org.png)|![](https://github.com/dec32/Image-Storage/blob/master/chess-style/chess.com.png)|
 
 The extension enables users to customize their piece sets sets through:
 
