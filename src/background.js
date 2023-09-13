@@ -39,6 +39,7 @@ browser.runtime.onMessage.addListener(msg => {
 
 
 function apply(color, piece, url, active=null) {
+    revert(color, piece)
     console.debug(`Now customizing ${color} ${piece}`)
     for (let site of sites) {
         let css = site.css(color, piece, url)  
