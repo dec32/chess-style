@@ -12,7 +12,7 @@ To install for Chrome, please see: [Install For Chrome](#install-for-chrome)
 
 |Popup|Lichess|Chess|
 |:----:|:----:|:----:|
-|![](https://github.com/dec32/Image-Storage/blob/master/chess-style/screenshot-1.png)|![](https://github.com/dec32/Image-Storage/blob/master/chess-style/screenshot-2.png)|![](https://github.com/dec32/Image-Storage/blob/master/chess-style/screenshot-3.png)|
+|![](https://github.com/dec32/Image-Storage/blob/master/chess-style/popup.png)|![](https://github.com/dec32/Image-Storage/blob/master/chess-style/lichess.org.png)|![](https://github.com/dec32/Image-Storage/blob/master/chess-style/chess.com.png)|
 
 The extension enables users to customize their piece sets sets through:
 
@@ -31,7 +31,7 @@ The support for chess.com is not fully accomplished, that is to say, the customi
 
 ## Install For Chrome
 
-[Chrome Extension](https://github.com/dec32/chess-style/releases/latest/chess-style-for-chrome.zip)
+[Chrome Extension (version 0.2)](https://github.com/dec32/chess-style/releases/tag/v0.2/chess-style-for-chrome.zip)
 
 1. Download the zip file from the link above and unzip it;
 2. Go to chrome://extensions/, toggle on developer mode;
