@@ -8,7 +8,7 @@
   },
 
   "background": {
-    "scripts":["src/background.js"],
+    "service_workers":["src/background.js"],
     "type": "module"
   },
 
