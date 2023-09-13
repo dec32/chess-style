@@ -4,6 +4,9 @@ const themes = ["gray", "blue", "green", "red", "black"]
 var cur = 0
 
 storage.getTheme().then(theme => {
+    if (theme) {
+        return
+    }
     for (let i = 0; i < themes.length; i++) {
         if (theme == themes[i]) {
             cur = i

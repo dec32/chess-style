@@ -1,1 +1,1 @@
-export default browser ? browser : chrome
+export default window.browser ? window.browser : chrome
