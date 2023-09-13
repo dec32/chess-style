@@ -75,7 +75,11 @@ body {
 .upload-set-btn {
     width: 100%;
     margin-top: 10pt;
-    /* display: none; */
+}
+
+.reset-btn {
+    width: 100%;
+    display: none;
 }
 
 .url-input {

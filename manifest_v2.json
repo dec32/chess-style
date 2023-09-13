@@ -1,26 +1,21 @@
 {
   "manifest_version": 2,
   "name": "Chess Style",
-  "version": "0.2",
+  "version": "0.3",
   "description": "Customize your piece set on lichess.org and chess.com.",
   "icons": {
     "281": "res/icon.png"
   },
 
+  "background": {
+    "scripts":["src/background.js"],
+    "type": "module"
+  },
+  
   "browser_action": {
     "default_title": "Chess Style",
     "default_popup": "src/popup.html"
   },
 
-  "content_scripts": [
-    {
-      "matches": ["*://lichess.org/*"],
-      "js": ["src/content_lichess.js"]
-    },
-    {
-      "matches": ["*://www.chess.com/*"],
-      "js": ["src/content_chess.js"]
-    }
-  ],
-  "permissions": ["storage", "tabs"]
+  "permissions": ["storage", "tabs", "scripting", "webNavigation", "*://lichess.org/*", "*://www.chess.com/*"]
 }

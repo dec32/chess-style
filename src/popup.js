@@ -1,40 +1,23 @@
+import browser from "./browser.js"
+import storage from "./storage.js"
 import * as filename from "./filename.js"
-import * as style from "./style.js"
-
-// chrome-compatitiy
-const browser = {
-    storage: chrome.storage,
-    runtime: chrome.runtime,
-    tabs: chrome.tabs
-}
+import "./popup_style.js"
 
 // url parameters
 const params = new URLSearchParams(window.location.search)
 const tab = params.get("tab")
 const uploading = params.get("uploading")
 
-const storage = browser.storage.local
-const sites = browser.runtime.getManifest().content_scripts.flatMap(script => script.matches)
+// const storage = browser.storage.local
 const firefox = navigator.userAgent.toLocaleLowerCase().includes("firefox")
 
 // styling
 if (tab) {
     document.querySelector(".heading").style.textAlign = "center"
 }
-style.enable()
 
 // recover from storage and fill up the textfields
-storage.get(obj => {
-    console.debug(`storage.get(): ${JSON.stringify(obj)}`)
-    for (let key of Object.keys(obj)) {
-        if (key == "theme") {
-            continue
-        }
-        let url = obj[key]
-        let id = key.split("_")
-        setTextfield(id[0], id[1], url)
-    }
-})
+storage.forEachPieces(setTextfield)
 
 // listen for url changes
 document.querySelectorAll(".url-text-input").forEach(input => {
@@ -43,7 +26,7 @@ document.querySelectorAll(".url-text-input").forEach(input => {
         let color = id[0]
         let piece = id[1]
         let url = e.target.value
-        saveAndApply(color, piece, url)
+        apply(color, piece, url)
     })
 })
 
@@ -107,19 +90,8 @@ function setTextfield(color, piece, url) {
     }
 }
 
-function saveAndApply(color, piece, url) {
-    // store the changes
-    let key = `${color}_${piece}`
-    let entry = {}
-    entry[key] = url
-    storage.set(entry)
-    // acknowledge all lichess tabs to re-render(altering the css)
-    browser.tabs.query({url: sites}, tabs => {
-        for (let tab of tabs) {
-            console.debug(`sending message to tab: ${tab.id}`)
-            browser.tabs.sendMessage(tab.id, {color: color, piece: piece, url: url})
-        }
-    })
+function apply(color, piece, url) {
+    browser.runtime.sendMessage({color: color, piece: piece, url: url})
 }
 
 function handleFile(file, id = null) {
@@ -137,7 +109,7 @@ function handleFile(file, id = null) {
     reader.addEventListener("load", () => {
         let url = reader.result
         setTextfield(id.color, id.piece, url)
-        saveAndApply(id.color, id.piece, url)
+        apply(id.color, id.piece, url)
     })
     reader.readAsDataURL(file);
 }
