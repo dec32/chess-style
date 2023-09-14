@@ -66,12 +66,10 @@ function revert(color, piece) {
         let css = delInjected(site, color, piece)
         browser.tabs.query({url:site.url}, tabs => {
             if (!css) {
-                console.warn(`Can not find the injected CSS for ${color} ${piece} on "${site.url}" thus reverting would be aborted.`)
                 return
             }
             for (let tab of tabs) {
                 let target = {tabId: tab.id}
-                // store the css so that it can be reverted
                 console.debug(`Remove CSS for ${color} ${piece} from tab #${tab.id} from "${site.url}".`)
                 browser.scripting.removeCSS({target: target, css: css})
             }
@@ -85,7 +83,7 @@ function putInjected(site, color, piece, css) {
         site.injected = new Map()
     }
     let key = `${color}_${piece}`
-    site.injected.set(key, css)
+    site.injected[key] = css
 }
 
 function delInjected(site, color, piece) {
