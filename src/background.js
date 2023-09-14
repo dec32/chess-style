@@ -20,23 +20,25 @@ console.debug("background.js is now awakened")
 // on start up
 storage.forEachPieces(apply)
 
-// listen for new tabs
-browser.webNavigation.onCommitted.addListener(e => {
-    storage.forEachPieces((color, piece, url)=>{
-        apply(color, piece, url, true)
-    })
-})
-
-
-// listen for changes from popup
-browser.runtime.onMessage.addListener(msg => {
-    if (msg.url) {
-        apply(msg.color, msg.piece, msg.url)
-        storage.setPiece(msg.color, msg.piece, msg.url)
+browser.runtime.onMessage.addListener((msg, sender, respond) => {
+    if (msg.tab) {
+        // listen for new tabs
+        storage.forEachPieces((color, piece, url)=>{
+            apply(color, piece, url, true)
+        })
+        console.debug("message received. now responding.")
+        respond("message received");
     } else {
-        revert(msg.color, msg.piece)
-        storage.removePiece(msg.color, msg.piece)
+        // listen for changes from popup
+        if (msg.url) {
+            apply(msg.color, msg.piece, msg.url)
+            storage.setPiece(msg.color, msg.piece, msg.url)
+        } else {
+            revert(msg.color, msg.piece)
+            storage.removePiece(msg.color, msg.piece)
+        }
     }
+
 })
 
 
@@ -50,11 +52,10 @@ function apply(color, piece, url, active=null) {
             for (let tab of tabs) {
                 let target = {tabId: tab.id}
                 console.debug(`Inject CSS for ${color} ${piece} into tab #${tab.id} from "${site.url}"."`)
-                browser.scripting.insertCSS({ target: target, css: css })
-                    .then(() => {
-                        // store the css so that it can be reverted
-                        putInjected(site, color, piece, css)
-                    })
+                browser.scripting.insertCSS({ target: target, css: css }, ()=>
+                    // store the css so that it can be reverted
+                    putInjected(site, color, piece, css)
+                )
             }
         })
     }

@@ -8,7 +8,7 @@
   },
 
   "background": {
-    "service_workers":["src/background.js"],
+    "service_worker": "src/background.js",
     "type": "module"
   },
 
@@ -16,6 +16,14 @@
     "default_title": "Chess Style",
     "default_popup": "src/popup.html"
   },
+
+  "content_scripts": [
+    {
+      "matches":["*://lichess.org/*", "*://www.chess.com/*"],
+      "js": ["src/content.js"],
+      "run_at": "document_start"
+    }
+  ],
 
   "permissions": ["storage", "tabs", "scripting"],
   "host_permissions":["*://lichess.org/*", "*://www.chess.com/*"]

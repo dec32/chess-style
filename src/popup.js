@@ -8,7 +8,7 @@ const params = new URLSearchParams(window.location.search)
 const tab = params.get("tab")
 const uploading = params.get("uploading")
 
-// const storage = browser.storage.local
+
 const firefox = navigator.userAgent.toLocaleLowerCase().includes("firefox")
 
 // styling
