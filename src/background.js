@@ -85,7 +85,7 @@ function putInjected(site, color, piece, css) {
         site.injected = new Map()
     }
     let key = `${color}_${piece}`
-    site.injected.put(key, css)
+    site.injected.set(key, css)
 }
 
 function delInjected(site, color, piece) {
