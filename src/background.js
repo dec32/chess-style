@@ -10,7 +10,15 @@ const sites = [
         url: "*://www.chess.com/*",
         css: (color, piece, url) => {
             let id = `${color[0]}${piece=="knight"?'n':piece[0]}`
-            return `.${id}{background-image: url(${url})!important} :root {--theme-piece-set-${id}: url(${url})!important}`
+            let css = `.${id}{background-image: url(${url})!important}`
+            if (url.startsWith("data:")) {
+                return css
+                // or else it will break the homepage
+                // because the promo panels on the homepage use one big background property to prensent the board
+                // if using data urls, those big background property string will be so long that the CSS engine refuses to render them
+            }
+            css = css + `:root {--theme-piece-set-${id}: url(${url})!important}`
+            return css
         }
     }
 ]
