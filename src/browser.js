@@ -1,1 +1,2 @@
-export default window.browser ? window.browser : chrome
+// export default chrome if release for chrome
+export default browser
