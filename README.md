@@ -41,5 +41,7 @@ Things would be a lot easier if Google didn't charge me 5 bucks for a developer 
 
 ## Themes
 
-- [John Pablok](https://github.com/dec32/chess-style/releases/download/v0.1/john-pablok.zip)
-- [HD Pieces](https://github.com/dec32/chess-style/releases/download/v0.1/hd-pieces.zip)
+[Google Drive](https://drive.google.com/drive/folders/1dFuwtJFKOWIaIIsi3DrpqRRt7ZSW2oC6)
+
+Themes can be downloaded here. All credits go to the original creators.
+
