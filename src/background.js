@@ -14,16 +14,15 @@ const sites = [
             if (url.startsWith("data:")) {
                 return css
                 // or else it will break the homepage
-                // because the promo panels on the homepage use one big background property to prensent the board
-                // if using data urls, those big background property string will be so long that the CSS engine refuses to render them
+                // because each of the promo panels on the homepage uses one big background property to present the board
+                // if using data urls, those big background property strings will be so long that the CSS engine refuses to render them
             }
+            // TODO migrate this part to content script for chess.com (using node.style to inject/revert CSS) 
             css = css + `:root {--theme-piece-set-${id}: url(${url})!important}`
             return css
         }
     }
 ]
-
-console.debug("background.js is now awakened")
 
 // on start up
 storage.forEachPieces(apply)
@@ -51,12 +50,14 @@ browser.runtime.onMessage.addListener((msg, sender, respond) => {
 
 
 
-function apply(color, piece, url, active=null) {
-    revert(color, piece)
+function apply(color, piece, url, activeOnly=null) {
+    if (!activeOnly) {
+        revert(color, piece)
+    }
     console.debug(`Now customizing ${color} ${piece}`)
     for (let site of sites) {
         let css = site.css(color, piece, url)
-        browser.tabs.query({url:site.url, active:active}, tabs => {    
+        browser.tabs.query({url:site.url, active:activeOnly}, tabs => {    
             for (let tab of tabs) {
                 let target = {tabId: tab.id}
                 console.debug(`Inject CSS for ${color} ${piece} into tab #${tab.id} from "${site.url}"."`)
