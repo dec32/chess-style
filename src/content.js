@@ -1,3 +1,5 @@
 const browser = window.browser ? window.browser : chrome
-console.debug(`Sending message to background.js.`)
-browser.runtime.sendMessage({tab: true}, console.debug)
+
+console.debug(`Calling background.js.`)
+browser.runtime.sendMessage({tab: true})
+    .then(resp => console.debug(`Response from background.js: ${resp}`))
