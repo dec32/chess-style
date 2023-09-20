@@ -17,13 +17,5 @@
     "default_popup": "src/popup.html"
   },
 
-  "content_scripts": [
-    {
-      "matches":["*://lichess.org/*", "*://www.chess.com/*"],
-      "js": ["src/content.js"],
-      "run_at": "document_start"
-    }
-  ],
-
-  "permissions": ["storage", "tabs", "scripting", "*://lichess.org/*", "*://www.chess.com/*"]
+  "permissions": ["storage", "tabs", "scripting", "webNavigation", "*://lichess.org/*", "*://www.chess.com/*"]
 }

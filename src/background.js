@@ -27,43 +27,46 @@ const sites = [
 // on start up
 storage.forEachPieces(apply)
 
-browser.runtime.onMessage.addListener((msg, sender, respond) => {
-    if (msg.tab) {
-        // listen for new tabs
-        storage.forEachPieces((color, piece, url) => apply(color, piece, url, true))
-            .then(() => respond("CSS Injection is done."))
-            .catch(e => respond(e))
+// listen for new tabs
+browser.webNavigation.onCommitted.addListener(detail => {
+    storage.forEachPieces((color, piece, url)=>{
+        apply(color, piece, url, detail.tabId)
+    })
+})
+
+
+browser.runtime.onMessage.addListener(async (msg, sender, respond) => {
+    if (msg.url) {
+        await apply(msg.color, msg.piece, msg.url)
+        storage.setPiece(msg.color, msg.piece, msg.url)
     } else {
-        // listen for changes from popup
-        if (msg.url) {
-            apply(msg.color, msg.piece, msg.url)
-            storage.setPiece(msg.color, msg.piece, msg.url)
-        } else {
-            revert(msg.color, msg.piece)
-            storage.removePiece(msg.color, msg.piece)
-        }
+        await revert(msg.color, msg.piece)
+        storage.removePiece(msg.color, msg.piece)
     }
     return true
 })
 
 
-
-async function apply(color, piece, url, activeOnly=null) {
-    if (!activeOnly) {
+async function apply(color, piece, url, tabId) {
+    if (!tabId) {
         await revert(color, piece)
     }
     for (let site of sites) {
         let css = site.css(color, piece, url)
-        let tabs = await browser.tabs.query({url:site.url, active:activeOnly})
+        let tabs = await browser.tabs.query({url:site.url})
         for (let tab of tabs) {
+            if (tabId && tabId != tab.id) {
+                continue;
+            }
             let target = {tabId: tab.id}
-            console.debug(`Inject CSS for ${color} ${piece} into tab #${tab.id} from "${site.url}"."`)
             await browser.scripting.insertCSS({ target: target, css: css })
+            console.debug(`Tab #${tab.id}(${site.url}): Injected CSS for ${color} ${piece}."`)
             // store the css so that it can be reverted
             putInjected(site, color, piece, css)
         }
     }
 }
+
 
 async function revert(color, piece) {
     for (let site of sites) {
@@ -74,8 +77,8 @@ async function revert(color, piece) {
         let tabs = await browser.tabs.query({url:site.url})
         for (let tab of tabs) {
             let target = { tabId: tab.id }
-            console.debug(`Remove CSS for ${color} ${piece} from tab #${tab.id} from "${site.url}".`)
             await browser.scripting.removeCSS({ target: target, css: css })
+            console.debug(`Tab #${tab.id}(${site.url}): Removed CSS for ${color} ${piece}.`)
         }
     }
 }
