@@ -30,11 +30,14 @@ export default {
     },
 
     forEachPieces: async function(fn) {
-        let obj = await s.get(keys)
-        for (let key of Object.keys(obj)) {
-            let split = key.split("_")
-            await fn(split[0], split[1], obj[key])
-        }
+        let promise = s.get(keys)
+        promise.then(obj => {
+            for (let key of Object.keys(obj)) {
+                let split = key.split("_")
+                promise.then(()=>fn(split[0], split[1], obj[key]))
+            }
+        })
+        return promise
     },
 
     setPiece: async function(color, piece, url) {
