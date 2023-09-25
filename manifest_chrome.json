@@ -17,6 +17,13 @@
     "default_popup": "src/popup.html"
   },
 
+  "content_scripts": [
+    {
+      "matches": ["*://www.chess.com/home"],
+      "js": ["src/chess.com.js"]
+    }
+  ],
+
   "permissions": ["storage", "tabs", "scripting", "webNavigation"],
   "host_permissions":["*://lichess.org/*", "*://www.chess.com/*"]
 }

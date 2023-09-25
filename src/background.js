@@ -4,32 +4,14 @@ import storage from "./storage.js"
 const sites = [
     {
         url: "*://lichess.org/*",
-        css: (color, piece, url, tab) => `.is2d .${color}.${piece} {background-image: url(${url})!important}`  
+        css: (color, piece, url) => `.is2d .${color}.${piece} {background-image: url(${url})!important}`  
     },
     {
         url: "*://www.chess.com/*",
-        css: async function (color, piece, url, tab) {
-            if (tab.url.endsWith("chess.com/home")) {
-                let id = `${color[0]}${piece=="knight"?'n':piece[0]}`
-                if (url.startsWith("data:")) {
-                    // convert all data URLs blob URLs for the homepage
-                    // fixme: it flickers
-                    let results = await browser.scripting.executeScript({ target: { tabId: tab.id }, func: getBlobURL, args: [url] })
-                    if (results.find(result => result.error)) {
-                        console.error("Error detected in injected scripts.")
-                        console.error(results)
-                    } else {
-                        url = results[0].result
-                        console.debug(`Data URL converted to '${url}'`)
-                    }
-                }
-                return `:root {--theme-piece-set-${id}: url(${url})!important}`
-            } else {
-                return `.${id}{background-image: url(${url})!important}`
-            }
+        css: (color, piece, url) => {
+            let id = `${color[0]}${piece=="knight"?'n':piece[0]}`
+            return `.${id}{background-image: url(${url})!important}`
         }
-
-
     }
 ]
 
@@ -61,14 +43,14 @@ async function apply(color, piece, url, tabId) {
         await revert(color, piece)
     }
     for (let site of sites) {
+        let css = site.css(color, piece, url)
         let tabs = await browser.tabs.query({url:site.url})
         for (let tab of tabs) {
             if (tabId && tabId != tab.id) {
                 continue;
             }
             let target = {tabId: tab.id}
-            let css = await site.css(color, piece, url, tab)
-            await browser.scripting.insertCSS({ target: target, css: css })
+            browser.scripting.insertCSS({ target: target, css: css })
             console.debug(`Tab #${tab.id}(${site.url}): Injected CSS for ${color} ${piece}."`)
             // store the css so that it can be reverted
             putInjected(site, color, piece, css)
