@@ -20,7 +20,8 @@
   "content_scripts": [
     {
       "matches": ["*://www.chess.com/home"],
-      "js": ["src/chess.com.js"]
+      "js": ["src/chess.com.js"],
+      "run_at": "document_start"
     }
   ],
 
