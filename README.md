@@ -27,8 +27,6 @@ When uploading a folder. The file name of an image must contain both the color a
 - `white.n.jiff`;
 - `wn_with_shadow.webp`;
 
-The support for chess.com is not fully accomplished, that is to say, the customization won't apply to the homepage.
-
 ## Install For Chrome
 
 [Chrome Extension](https://github.com/dec32/chess-style/releases/latest/download/chess-style-for-chrome.zip)
