@@ -1,4 +1,6 @@
 // fixing for homepage
+const browser = window.browser || chrome
+const root = document.querySelector(':root').style
 const keys = []
 for (let color of ["black", "white"]) {
     for (let piece of ["king", "queen", "rook", "bishop", "knight", "pawn"]) {
@@ -6,15 +8,21 @@ for (let color of ["black", "white"]) {
     }
 }
 
-// todo don't use the chrome key word
-let obj = chrome.storage.local.get(keys, obj=>{
+let obj = browser.storage.local.get(keys, obj=>{
     for (let key of Object.keys(obj)) {
         let split = key.split("_")
         inject(split[0], split[1], obj[key])
     }
 })
 
-const root = document.querySelector(':root').style
+browser.runtime.onMessage.addListener(msg => {
+    if (msg.url) {
+        inject(msg.color, msg.piece, msg.url)
+    } else {
+        revert(msg.color, msg.piece)
+    }
+})
+
 
 function inject(color, piece, url) {
     let id = `${color[0]}${piece=="knight"?'n':piece[0]}`
@@ -22,6 +30,11 @@ function inject(color, piece, url) {
         url = getBlobURL(url)
     }
     root.setProperty(`--theme-piece-set-${id}`, `url(${url})`)
+}
+
+function revert(color, piece) {
+    let id = `${color[0]}${piece=="knight"?'n':piece[0]}`
+    root.setProperty(`--theme-piece-set-${id}`, "")
 }
 
 function getBlobURL(dataURL) {

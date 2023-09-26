@@ -14,18 +14,19 @@ const sites = [
         }
     }
 ]
+const sitesWithScript =  browser.runtime.getManifest().content_scripts.flatMap(it => it.matches)
 
 // on start up
 storage.forEachPieces(apply)
 
 // listen for new tabs
-browser.webNavigation.onCommitted.addListener(detail => {
+browser.webNavigation.onCommitted.addListener(async detail => {
     storage.forEachPieces((color, piece, url)=>{
         apply(color, piece, url, detail.tabId)
     })
 })
 
-
+// listen for changes from popup
 browser.runtime.onMessage.addListener(async (msg, sender, respond) => {
     if (msg.url) {
         await apply(msg.color, msg.piece, msg.url)
@@ -33,6 +34,11 @@ browser.runtime.onMessage.addListener(async (msg, sender, respond) => {
     } else {
         await revert(msg.color, msg.piece)
         storage.removePiece(msg.color, msg.piece)
+    }
+    // tabs with script won't detect changes from popup, so repost the messages to them
+    let tabs = await browser.tabs.query({ url: sitesWithScript })
+    for (let tab of tabs) {
+        browser.tabs.sendMessage(tab.id, msg)
     }
     return true
 })
