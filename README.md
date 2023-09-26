@@ -1,12 +1,12 @@
-# Chess Style
+# Chess Style 
 
-Chess Style is a Firefox/Chrome extension that allows you to customize your piece set on lichess.org and chess.com.
+Chess Style is a browser extension that allows you to customize your piece set on lichess.org and chess.com.
 
-## Release
+## Install
 
-- [Firefox Add-on](https://addons.mozilla.org/firefox/addon/chess-style/)
+[![Firefox Add-on](./docs/firefox-badge.png)](https://addons.mozilla.org/firefox/addon/chess-style/)
 
-To install for Chrome, please see: [Install For Chrome](#install-for-chrome)
+To install for Chrome, please see [Install For Chrome](#install-for-chrome)
 
 ## Detail
 
@@ -37,9 +37,9 @@ When uploading a folder. The file name of an image must contain both the color a
 
 Things would be a lot easier if Google didn't charge me 5 bucks for a developer account.
 
-## Themes
+## Piece Sets
 
 [Google Drive](https://drive.google.com/drive/folders/1dFuwtJFKOWIaIIsi3DrpqRRt7ZSW2oC6)
 
-Themes can be downloaded here. All credits go to the original creators.
+Piece sets can be downloaded here. All credits go to the original creators.
 
