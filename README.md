@@ -32,7 +32,7 @@ When uploading a folder. The file name of an image must contain both the color a
 [Chrome Extension](https://github.com/dec32/chess-style/releases/latest/download/chess-style-for-chrome.zip)
 
 1. Download the zip file from the link above and unzip it;
-2. Go to chrome://extensions/, toggle on developer mode;
+2. Go to `chrome://extensions/`, toggle on developer mode;
 3. Click "Load unpacked extension" and select the unzipped folder.
 
 Things would be a lot easier if Google didn't charge me 5 bucks for a developer account.
