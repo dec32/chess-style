@@ -29,15 +29,14 @@ export default {
         await s.set({theme: theme})
     },
 
-    forEachPieces: function(fn) {
-        let promise = s.get(keys)
-        promise.then(obj => {
-            for (let key of Object.keys(obj)) {
-                let split = key.split("_")
-                promise.then(()=>fn(split[0], split[1], obj[key]))
-            }
-        })
-        return promise
+    forEachPieces: async function(fn) {
+        let promises = []
+        let obj = await s.get(keys)
+        for (let key of Object.keys(obj)) {
+            let split = key.split("_")
+            promises.push(Promise.resolve(fn(split[0], split[1], obj[key])))
+        }
+        await Promise.all(promises)
     },
 
     getPieces: async function() {
