@@ -1,6 +1,6 @@
 import browser from "./browser.js"
 
-const s = browser.storage.local
+const s = browser.storage.sync
 const keys = []
 for (let color of ["black", "white"]) {
     for (let piece of ["king", "queen", "rook", "bishop", "knight", "pawn"]) {
@@ -29,7 +29,7 @@ export default {
         await s.set({theme: theme})
     },
 
-    forEachPieces: async function(fn) {
+    forEachPieces: function(fn) {
         let promise = s.get(keys)
         promise.then(obj => {
             for (let key of Object.keys(obj)) {
@@ -38,6 +38,16 @@ export default {
             }
         })
         return promise
+    },
+
+    getPieces: async function() {
+        let obj = await s.get(keys)
+        let pieces = []
+        for (let key of Object.keys(obj)) {
+            let split = key.split("_")
+            pieces.push({color:split[0], piece:split[1], url: obj[key]})
+        }
+        return pieces;
     },
 
     setPiece: async function(color, piece, url) {
