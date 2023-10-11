@@ -8,7 +8,7 @@ for (let color of ["black", "white"]) {
     }
 }
 
-let obj = browser.storage.sync.get(keys, obj=>{
+let obj = browser.storage.local.get(keys, obj=>{
     for (let key of Object.keys(obj)) {
         let split = key.split("_")
         inject(split[0], split[1], obj[key])

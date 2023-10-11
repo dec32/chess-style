@@ -1,6 +1,6 @@
 import browser from "./browser.js"
-
-const s = browser.storage.sync
+// todo:you need an add-on id to enable storage.sync
+const s = browser.storage.local
 const keys = []
 for (let color of ["black", "white"]) {
     for (let piece of ["king", "queen", "rook", "bishop", "knight", "pawn"]) {
