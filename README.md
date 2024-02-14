@@ -10,15 +10,15 @@ To install for Chrome, please see [Install For Chrome](#install-for-chrome)
 
 ## Detail
 
-|Popup|Lichess|Chess|
-|:----:|:----:|:----:|
-|![](./docs/popup.png)|![](./docs/lichess.org.png)|![](./docs/chess.com.png)|
+| Popup                 | Lichess                     | Chess                     |
+|:---------------------:|:---------------------------:|:-------------------------:|
+| ![](./docs/popup.png) | ![](./docs/lichess.org.png) | ![](./docs/chess.com.png) |
 
-The extension enables users to customize their piece sets sets through:
+The extension allows users to customize their piece sets through:
 
 1. Filling in URLs;
 2. Uploading image files;
-3. Uploading a folder of images (the add-on will read the names of the images and automatically assign them to their correspond pieces).
+3. Uploading a folder of images (the extension will read the names of the images and automatically assign them to their correspond pieces).
 
 When uploading a folder. The file name of an image must contain both the color and piece type. One-letter abbreviations are allowed but when using abbreviations for both color and piece type, they should be written as one word. Words are split by space( ), underscore(_), short dash(-) or dot(.). Take white knight for example, the followings are all legal names:
 - `white knight.svg` (recommended);
